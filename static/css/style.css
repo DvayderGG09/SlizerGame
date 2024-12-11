@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../images/fon.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.name-game {
+    color: #129929;
+    text-shadow: 0px 1px 0px #000,
+                 0px 2px 0px #000,
+                 0px 3px 0px #000;
+    text-align: center;
+    letter-spacing: 5px;
+    position: absolute;
+    font-size: 65px;
+    top: -40px;
+}
+
+.game-map {
+    position: absolute;
+    top: 110px;
+    width: 650px;
+    height: 650px;
+    border-radius: 15px;
+    border: 5px solid black;
+    background-color: #127a10;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+/* Верхний счетчик времени и яблок */
+#game-info {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    z-index: 3;
+    visibility: hidden;
+}
+
+/* Иконки */
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Полупрозрачный фон с градиентом и размытием */
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 200, 83, 0.8));
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: opacity 0.5s ease;
+}
+
+/* Кнопка Старт */
+.start-btn {
+    background-color: #ff5722;
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+.start-btn:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+}
+
+/* Стили для сообщения "Подвигайтесь !!" */
+.start-message {
+    margin: 0;
+    font-size: 15px;
+    color: #6c9172;
+    z-index: 4;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    visibility: hidden;
+}
+
+/* Стили для отсчета */
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 72px;
+    font-weight: bold;
+    color: white;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s ease-out;
+}
+
+/* Стили для завершения игры */
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 4;
+    visibility: hidden; /* Изначально скрыто */
+}
+
+/* Стили для головы змеи */
+.snake-head {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #ffcc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+/* Стили для глаз */
+.eye {
+    width: 4px;
+    height: 4px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+}
+
+/* Позиционирование глаз на голове змеи */
+.snake-head .eye.left {
+    top: 10px;
+    left: 15px;
+}
+
+.snake-head .eye.right {
+    top: 10px;
+    right: 15px;
+}
+
+/* Стили для сегментов туловища */
+.snake-body {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #ffcc00;
+    border: 2px solid black;
+}
+
+.apples {
+    position: absolute;
+    left: 300px;
+    top: 14px;
+    text-align: right;
+    width: 80px;
+}
+
+.time {
+    position: absolute;
+    left: 40px;
+    top: 12px;
+    text-align: left;
+}
+
+.apple-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+}
+
+.time-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+}
+
+.spawn-zone {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 25px);
+    grid-template-rows: repeat(auto-fill, 25px);
+    position: absolute;
+    visibility: hidden;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.spawn-zone-blocks {
+    position: relative;
+    margin: 0;
+    visibility: visible;
+    background-color: none;
+    width: 25px;
+    height: 25px;
+}

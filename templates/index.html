@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Моя игра</title>
+</head>
+<body>
+    <h1 class="name-game">Змейка</h1>
+
+
+    <div class="game-map">
+        <!-- Верхний счетчик времени и яблок -->
+        <div id="game-info">
+            <img src="{{ url_for('static', filename='images/time-icon.png') }}" class="time-icon">
+            <div id="time-lived" class="time">0</div>
+            <p class="start-message">Нажмите любую клавишу что-бы начать</p>
+            <div id="apples-collected" class="apples">0</div>
+            <img src="{{ url_for('static', filename='images/apple.png') }}" class="apple-icon">
+        </div>
+        <div class="spawn-zone">
+            {% for i in range(1, 677) %}
+                <p class="spawn-zone-blocks" id="spawn-zone-block-{{ i }}"></p>
+            {% endfor %}
+        </div>
+        <div id="overlay" class="overlay">
+            <button id="start-btn" class="start-btn">Начать игру</button>
+        </div>
+        <div id="game-over">
+            <h2>Игра завершена!</h2>
+            <p>Вы прожили: <span id="time-lived-text">0</span></p>
+            <p>Собрано яблок: <span id="apples-collected-text">0</span></p>
+            <button id="restart-btn" class="start-btn">Начать заново</button>
+        </div>
+        <div id="countdown" class="countdown"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript/game.js') }}"></script>
+</body>
+</html>
