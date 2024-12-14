@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ time: applesCollected, apples: gameTimeText })
+                body: JSON.stringify({ time: gameTimeText, apples: applesCollected })
             });
         const data = await sendData.json();
         gameOverElement.style.visibility = 'visible';
