@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const spawnBlocks = document.querySelectorAll('.spawn-zone-blocks');
     const startMessage = document.querySelector('.start-message');
 
+    let gameTimeText = "";
     let lastUpdate = performance.now();
     let gameTime = 0;
     let applesCollected = 0;
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const minutes = Math.floor((totalSeconds % 3600) / 60); // Минуты
         const seconds = totalSeconds % 60; // Секунды
 
-        let gameTimeText = "";
+        gameTimeText = "";
 
         if (hours > 0) { // Если есть часы
             gameTimeText += `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -327,9 +328,17 @@ document.addEventListener('DOMContentLoaded', function () {
         head.style.top = `${newHeadY}px`;
     }
 
-    function endGame() {
+    async function endGame() {
         startButton.disabled = false;
         gameOver = true;
+        const sendData = await fetch('/sendData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ time: applesCollected, apples: gameTimeText })
+            });
+        const data = await sendData.json();
         gameOverElement.style.visibility = 'visible';
         document.getElementById('time-lived-text').innerText = timeLivedElement.innerText;
         document.getElementById('apples-collected-text').innerText = `${applesCollected}`;

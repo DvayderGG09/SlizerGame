@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <title>Админ-панель</title>
+</head>
+<body>
+    {% if data|list|length > 0 %}
+    <h1 class="text-1">База данных</h1>
+    <div class="db-container">
+        <div class="header">Время</div> <div class="header">Яблоки</div>
+        {% for time, apple in data %}
+        <div class="value">{{ apple }}</div>
+        <div class="value">{{ time }}</div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h1 class="text-1">База данных пуста</h1>
+    {% endif %}
+</body>
+</html>
